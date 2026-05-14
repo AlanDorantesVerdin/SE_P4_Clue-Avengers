@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avengers: Secret Skrull Invasion</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app-bg"></div>
+    <div class="vignette-overlay"></div>
+
+    <!-- PANTALLA 1: LORE INICIAL -->
+    <section id="screen-lore" class="screen active glass-panel-heavy">
+        <div class="lore-content">
+            <i class="fa-brands fa-galactic-senate shield-logo pulse"></i>
+            <h1 class="glitch-text">ALERTA ROJA</h1>
+            <div id="typewriter-container" class="typewriter-text">
+                <!-- Se inyecta por JS -->
+            </div>
+            <button id="btn-start" class="hud-btn hidden">INICIAR INVESTIGACIÓN <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2: INTERROGATORIO -->
+    <section id="screen-game" class="screen hidden">
+        <header class="hud-header glass-panel">
+            <div class="header-info">
+                <h1>BASE DE DATOS DE LA TORRE</h1>
+                <p>Haz clic en los sujetos, armas o salas para interrogar o escanear.</p>
+            </div>
+            <div class="status-panel">
+                <span class="neon-number" id="queries-counter">7</span>
+                <span>PUNTOS DE ACCIÓN RESTANTES</span>
+            </div>
+        </header>
+
+        <div class="app-layout">
+            <!-- Columna Izq: Log de Resultados -->
+            <aside class="control-panel glass-panel">
+                <h3 class="log-title"><i class="fa-solid fa-list"></i> REGISTRO DE EVIDENCIA</h3>
+                <div class="clue-log-container">
+                    <ul id="clue-log" class="clue-list">
+                        <li class="system-msg">Esperando entrada de datos...</li>
+                    </ul>
+                </div>
+                <button id="btn-goto-accuse" class="hud-btn alt-btn w-100 hidden">IR A SALA DE ACUSACIÓN <i class="fa-solid fa-gavel"></i></button>
+            </aside>
+
+            <!-- Columna Der: Cuadrículas de Elementos -->
+            <main class="grid-panel">
+                <!-- Personajes -->
+                <section class="category-section">
+                    <h2 class="category-title"><i class="fa-solid fa-user-astronaut"></i> INTERROGAR SOSPECHOSOS</h2>
+                    <div class="cards-grid" id="characters-grid"></div>
+                </section>
+                <!-- Armas -->
+                <section class="category-section">
+                    <h2 class="category-title"><i class="fa-solid fa-khanda"></i> RASTREAR ARMAS</h2>
+                    <div class="cards-grid" id="weapons-grid"></div>
+                </section>
+                <!-- Locaciones -->
+                <section class="category-section">
+                    <h2 class="category-title"><i class="fa-solid fa-map-location-dot"></i> ESCANEAR ZONAS</h2>
+                    <div class="cards-grid" id="locations-grid"></div>
+                </section>
+            </main>
+        </div>
+    </section>
+
+    <!-- PANTALLA 3: ACUSACIÓN Y RESULTADO -->
+    <section id="screen-accuse" class="screen hidden glass-panel-heavy prompt-box">
+        <div class="accuse-form">
+            <h2><i class="fa-solid fa-gavel"></i> EMITIR ACUSACIÓN OFICIAL</h2>
+            <p>Con base en las contradicciones encontradas en tus interrogatorios, selecciona a los culpables. Tienes un solo intento.</p>
+            
+            <div class="dropdown-group">
+                <label>¿Quién es el Skrull?</label>
+                <select id="select-character">
+                    <option value="" disabled selected>Selecciona Personaje...</option>
+                    <option value="Capitán América">Capitán América</option>
+                    <option value="Iron Man">Iron Man</option>
+                    <option value="Ant-Man">Ant-Man</option>
+                    <option value="Black Widow">Black Widow</option>
+                    <option value="Hawkeye">Hawkeye</option>
+                </select>
+            </div>
+            
+            <div class="dropdown-group">
+                <label>¿Qué Arma utilizó para el asesinato?</label>
+                <select id="select-weapon">
+                    <option value="" disabled selected>Selecciona Arma...</option>
+                    <option value="Escudo de Vibranium">Escudo de Vibranium</option>
+                    <option value="Cetro de Loki">Cetro de Loki</option>
+                    <option value="Guantelete Repulsor">Guantelete Repulsor</option>
+                    <option value="Discos Pym">Discos Pym</option>
+                    <option value="Widow's Bite">Widow's Bite</option>
+                </select>
+            </div>
+
+            <div class="dropdown-group">
+                <label>¿En qué Locación ocurrió?</label>
+                <select id="select-location">
+                    <option value="" disabled selected>Selecciona Locación...</option>
+                    <option value="Cuarto de Entrenamiento">Cuarto de Entrenamiento</option>
+                    <option value="Hangar de Aterrizaje">Hangar de Aterrizaje</option>
+                    <option value="Laboratorio Stark">Laboratorio Stark</option>
+                    <option value="Sala de Juntas">Sala de Juntas</option>
+                    <option value="Reactor Arc">Reactor Arc</option>
+                </select>
+            </div>
+
+            <button id="btn-submit-accuse" class="hud-btn disabled" disabled>CONDENAR <i class="fa-solid fa-skull"></i></button>
+        </div>
+
+        <div id="result-box" class="result-box hidden">
+            <h2 id="result-title"></h2>
+            <p id="result-desc"></p>
+            <button id="btn-restart" class="hud-btn alt-btn mt-20">JUGAR DE NUEVO</button>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
